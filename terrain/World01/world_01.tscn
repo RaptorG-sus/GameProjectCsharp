@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1n52elllxrsb"]
+
+[ext_resource type="PackedScene" uid="uid://b035fodg8tfp7" path="res://character/player/player.tscn" id="1_i2lvy"]
+[ext_resource type="Texture2D" uid="uid://d3728vdt73stg" path="res://terrain/World01/ArtW01/terrain.png" id="2_6iw5a"]
+[ext_resource type="Texture2D" uid="uid://bdaoef50phap8" path="res://terrain/World01/ArtW01/neonBlank.png" id="3_4jpia"]
+[ext_resource type="PackedScene" uid="uid://bpf0dnrxg7jjp" path="res://character/enemy/enemy_test/first_enemy.tscn" id="3_6iw5a"]
+
+[sub_resource type="Environment" id="Environment_cujcs"]
+background_mode = 3
+glow_enabled = true
+glow_strength = 0.96
+glow_bloom = 0.08
+glow_blend_mode = 0
+
+[node name="World01" type="Node2D"]
+
+[node name="terrainGen" type="Node2D" parent="."]
+position = Vector2(1500, 700)
+scale = Vector2(10, 10)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="terrainGen"]
+layer = -1
+follow_viewport_enabled = true
+
+[node name="terrain" type="Sprite2D" parent="terrainGen/CanvasLayer"]
+z_index = 2
+position = Vector2(1500, 700)
+scale = Vector2(10, 10)
+texture = ExtResource("2_6iw5a")
+
+[node name="NeonBlank" type="Sprite2D" parent="terrainGen"]
+modulate = Color(0.53416556, 1.5229772, 1.5229772, 1)
+self_modulate = Color(0.7766708, 1.0964829, 1.0964829, 1)
+z_index = -1
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("3_4jpia")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cujcs")
+
+[node name="Character" type="Node2D" parent="."]
+
+[node name="Enemy" type="Node2D" parent="Character"]
+
+[node name="FirstEnemy" parent="Character/Enemy" instance=ExtResource("3_6iw5a")]
+position = Vector2(823, 365)
+
+[node name="Allie" type="Node2D" parent="Character"]
+
+[node name="Player" parent="Character" instance=ExtResource("1_i2lvy")]
+position = Vector2(1500, 700)
+
+[node name="Projectile" type="Node2D" parent="."]
+
+[node name="PlayerProjectile" type="Node2D" parent="Projectile"]

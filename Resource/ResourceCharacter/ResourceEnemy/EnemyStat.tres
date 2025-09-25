@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="EnemyStat" load_steps=2 format=3 uid="uid://cqsah8evl2cfi"]
+
+[ext_resource type="Script" uid="uid://cswyafsydm6fp" path="res://Resource/ResourceCharacter/ResourceEnemy/EnemyStat.cs" id="1_fww0u"]
+
+[resource]
+script = ExtResource("1_fww0u")
+Health = 10
+Damage = 2

@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://b035fodg8tfp7"]
+
+[ext_resource type="Script" uid="uid://c8bmf11eqnhib" path="res://character/player/Player.cs" id="1_8eijk"]
+[ext_resource type="Texture2D" uid="uid://dyf2tlsdgaykh" path="res://image/icon.svg" id="2_gtsfv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
+radius = 300.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_8eijk")
+
+[node name="hitBoxPlayer" type="CollisionShape2D" parent="."]
+scale = Vector2(6, 6)
+shape = SubResource("RectangleShape2D_onrkg")
+
+[node name="SpritePlayer" type="Sprite2D" parent="."]
+texture = ExtResource("2_gtsfv")
+
+[node name="CameraPlayer" type="Camera2D" parent="."]
+
+[node name="Label" type="Label" parent="."]
+offset_top = -101.0
+offset_right = 40.0
+offset_bottom = -78.0
+
+[node name="Shoot" type="Node2D" parent="."]
+
+[node name="rangePlayerArea" type="Area2D" parent="."]
+
+[node name="rangePlayerCollisionShape" type="CollisionShape2D" parent="rangePlayerArea"]
+shape = SubResource("CircleShape2D_onrkg")
+
+[connection signal="body_entered" from="rangePlayerArea" to="." method="_on_range_player_area_body_entered"]
