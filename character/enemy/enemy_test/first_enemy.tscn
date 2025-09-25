@@ -1,15 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://bpf0dnrxg7jjp"]
+[gd_scene load_steps=7 format=3 uid="uid://bpf0dnrxg7jjp"]
 
 [ext_resource type="Texture2D" uid="uid://dyf2tlsdgaykh" path="res://image/icon.svg" id="1_a52xc"]
 [ext_resource type="Script" uid="uid://crwfjf2i2m3xb" path="res://character/enemy/enemy_test/FirstEnemy.cs" id="1_s728f"]
-[ext_resource type="Resource" uid="uid://cqsah8evl2cfi" path="res://Resource/ResourceCharacter/ResourceEnemy/EnemyStat.tres" id="2_t6504"]
+[ext_resource type="Script" uid="uid://cswyafsydm6fp" path="res://Resource/ResourceCharacter/ResourceEnemy/EnemyStat.cs" id="2_t6504"]
+
+[sub_resource type="Resource" id="Resource_umtke"]
+resource_local_to_scene = true
+script = ExtResource("2_t6504")
+Health = 12
+Damage = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s728f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t6504"]
+size = Vector2(63, 63)
 
 [node name="FirstEnemy" type="CharacterBody2D"]
 safe_margin = 2.0
 script = ExtResource("1_s728f")
-Stats = ExtResource("2_t6504")
+Stats = SubResource("Resource_umtke")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(3.1, 3.1)
@@ -19,3 +28,12 @@ shape = SubResource("RectangleShape2D_s728f")
 modulate = Color(1, 0, 0, 1)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_a52xc")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionHitBox" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_t6504")
+
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

@@ -1,32 +1,45 @@
 using Godot;
 
-
-public partial class Missile : Area2D
+namespace Weapon
 {
-
-    [Export]
-    public Vector2 direction2d { get; set; }
-
-    [Export]
-    public Vector2 startPosition { get; set; }
-
-    private Timer timer;
-    public override void _Ready()
+    public partial class Missile : Area2D
     {
-        base._Ready();
-        timer = GetNode<Timer>("Timer");
-        Position = startPosition; 
-    }
 
-    private void _on_timer_timeout()
-    {
-        GD.Print("timeout :)");
-        QueueFree();
-    }
+        [Export]
+        public Vector2 direction2d { get; set; }
 
-    public override void _Process(double delta)
-    {
-        Position += direction2d.Normalized() * (float)delta * 300;
+        [Export]
+        public Vector2 startPosition { get; set; }
+
+        [Export]
+        public Resource Stats;
+
+        private MissileStats missileStats;
+        private Timer timer;
+        
+        public int damage { get; set; }
+        public override void _Ready()
+        {
+            base._Ready();
+            timer = GetNode<Timer>("Timer");
+            Position = startPosition;
+            if (Stats is MissileStats missileStats)
+            {
+                this.missileStats = missileStats;
+                this.damage = missileStats.damage;
+            }
+        }
+
+        private void _on_timer_timeout()
+        {
+            missileStats.ApplyElementEffect();
+            QueueFree();
+        }
+
+        public override void _Process(double delta)
+        {
+            Position += direction2d.Normalized() * (float)delta * 300;
+        }
     }
 }
 

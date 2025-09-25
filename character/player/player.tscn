@@ -28,6 +28,8 @@ offset_bottom = -78.0
 [node name="Shoot" type="Node2D" parent="."]
 
 [node name="rangePlayerArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
 
 [node name="rangePlayerCollisionShape" type="CollisionShape2D" parent="rangePlayerArea"]
 shape = SubResource("CircleShape2D_onrkg")

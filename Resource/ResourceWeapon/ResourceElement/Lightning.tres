@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="Lightning" load_steps=2 format=3 uid="uid://doucll7pjdwt8"]
+
+[ext_resource type="Script" uid="uid://cukqog75lmgyd" path="res://Resource/ResourceWeapon/ResourceElement/Lightning.cs" id="1_khov4"]
+
+[resource]
+script = ExtResource("1_khov4")

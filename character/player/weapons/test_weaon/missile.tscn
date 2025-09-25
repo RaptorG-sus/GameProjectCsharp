@@ -1,13 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://x8k5q2tfstou"]
+[gd_scene load_steps=5 format=3 uid="uid://x8k5q2tfstou"]
 
 [ext_resource type="Script" uid="uid://yv8ge0jkau5g" path="res://character/player/weapons/test_weaon/Missile.cs" id="1_xbx07"]
 [ext_resource type="Texture2D" uid="uid://dyf2tlsdgaykh" path="res://image/icon.svg" id="2_7yy4g"]
+[ext_resource type="Resource" uid="uid://dl5h6jykjt0n2" path="res://Resource/ResourceWeapon/MissileStats.tres" id="2_p1k0g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0uoyr"]
 radius = 19.0
 
 [node name="missile" type="Area2D"]
+collision_layer = 2
 script = ExtResource("1_xbx07")
+Stats = ExtResource("2_p1k0g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_0uoyr")

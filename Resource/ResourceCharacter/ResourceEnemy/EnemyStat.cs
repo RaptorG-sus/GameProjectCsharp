@@ -32,7 +32,6 @@ namespace Enemy
         public void enemyTakeDamage(int damageTake)
         {
             this.Health -= damageTake;
-            GD.Print(this.Health);
         }
     }
 }

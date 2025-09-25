@@ -45,7 +45,6 @@ public partial class Player : CharacterBody2D
     {
         direction2dForShoot.X = body.Position.X - Position.X;
         direction2dForShoot.Y = body.Position.Y - Position.Y;
-        GD.Print(direction2dForShoot.Normalized());
         _shoot.Fire(direction2dForShoot, shootNode, Position);
     }
 }
@@ -64,7 +63,6 @@ public partial class Shoot : Area2D
     public void Fire(Vector2 direction2d, Node2D shoot, Vector2 startPosition)
     {
         var instance = this.ammo.Instantiate();
-        GD.Print(instance);
         instance.Set("startPosition", startPosition);
         instance.Set("direction2d", direction2d);
         shoot.AddChild(instance);

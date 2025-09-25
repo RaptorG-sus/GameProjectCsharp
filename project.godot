@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Nouveau projet de jeu"
+config/name="Projet_Csharp"
 run/main_scene="uid://d1n52elllxrsb"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
 config/icon="res://image/icon.svg"

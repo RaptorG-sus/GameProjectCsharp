@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="Fire" load_steps=2 format=3 uid="uid://j5km556y7yfu"]
+
+[ext_resource type="Script" uid="uid://blab3ldhegt6k" path="res://Resource/ResourceWeapon/ResourceElement/Fire.cs" id="1_qybbx"]
+
+[resource]
+script = ExtResource("1_qybbx")

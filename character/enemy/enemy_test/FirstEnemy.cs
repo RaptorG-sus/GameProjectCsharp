@@ -1,4 +1,6 @@
+using System;
 using Godot;
+using Weapon;
 
 namespace Enemy
 {
@@ -7,6 +9,10 @@ namespace Enemy
         private Vector2 direction2d;
         private Vector2 positionPlayer;
 
+        public int coord_x { get; set; }
+        public int coord_y { get; set; }
+
+        Vector2 coord_depart;
         private CharacterBody2D Player;
         [Export]
         public Resource Stats;
@@ -18,10 +24,12 @@ namespace Enemy
             GD.Print(Player.Position);
             if (Stats is EnemyStat enemyStat)
             {
-                GD.Print(enemyStat.Health);
                 this.enemyStat = enemyStat;
                 enemyStat.enemyTakeDamage(2);
             }
+            coord_depart.X = coord_x;
+            coord_depart.Y = coord_y;
+            Position = coord_depart;
         }
 
         public override void _Process(double delta)
@@ -30,10 +38,17 @@ namespace Enemy
             direction2d.Y = Player.Position.Y - Position.Y;
             Position += direction2d.Normalized() * 400 * (float)delta;
             MoveAndSlide();
-            if (Input.IsActionJustPressed("shoot"))
+
+            if (enemyStat.Health <= 0)
             {
-                enemyStat.enemyTakeDamage(2);
+                GD.Print("dafuk ?");
+                QueueFree();
             }
+        }
+        private void _on_hit_box_area_entered(Area2D area)
+        {
+            GD.Print(enemyStat.Health);
+            enemyStat.enemyTakeDamage((int)area.Get("damage"));
         }
 
     }

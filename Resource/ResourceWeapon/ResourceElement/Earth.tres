@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="Earth" load_steps=2 format=3 uid="uid://byewi456esqfk"]
+
+[ext_resource type="Script" uid="uid://dn7ayegkh61fn" path="res://Resource/ResourceWeapon/ResourceElement/Earth.cs" id="1_n0hte"]
+
+[resource]
+script = ExtResource("1_n0hte")
