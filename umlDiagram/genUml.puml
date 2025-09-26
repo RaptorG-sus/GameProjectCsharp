@@ -1,0 +1,32 @@
+@startuml player
+
+package "Game" #A0DDDD{
+
+    class Player{
+        PlayerStat stats
+        int numberWeapons [1-6]
+        Weapon[0-6] weapons
+        Object[] objects
+        Vector2 Position
+    }
+
+    class PlayerStat{
+        int health [0 - *]
+        int speed [1 - 400] 
+        int damageBase [1 - *] 
+        int damageProximity [0.1 - *] 
+        int damageDistant [0.1 - *] 
+        int defense [0 - *] 
+        double attackSpeed [1 - *] 
+        double projectileSpeed [1 - *] 
+        double aoe [0 - *]
+        double size [0.1 - *] x
+        double escape [0-100]
+        int healthRegen [0 - *]
+        double lifeSteal [-100 - 100] % 
+    }
+}
+
+
+
+@enduml
