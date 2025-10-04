@@ -62,7 +62,11 @@ public partial class Player : CharacterBody2D
     }
 }
 
-
+public partial class Target : CharacterBody2D
+{
+    Vector2 direction2dForShoot;
+    
+}
 
 public partial class Shoot : Area2D
 {
