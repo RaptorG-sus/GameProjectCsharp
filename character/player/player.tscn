@@ -1,7 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://b035fodg8tfp7"]
+[gd_scene load_steps=7 format=3 uid="uid://b035fodg8tfp7"]
 
 [ext_resource type="Script" uid="uid://c8bmf11eqnhib" path="res://character/player/Player.cs" id="1_8eijk"]
 [ext_resource type="Texture2D" uid="uid://dyf2tlsdgaykh" path="res://image/icon.svg" id="2_gtsfv"]
+[ext_resource type="Script" uid="uid://qpdovwdgj5p1" path="res://Resource/StatGen.cs" id="2_wu8e1"]
+
+[sub_resource type="Resource" id="Resource_g20gq"]
+script = ExtResource("2_wu8e1")
+health = 20
+damageBase = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 
@@ -10,6 +16,7 @@ radius = 300.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_8eijk")
+_playerStat = SubResource("Resource_g20gq")
 
 [node name="hitBoxPlayer" type="CollisionShape2D" parent="."]
 scale = Vector2(6, 6)
@@ -24,8 +31,6 @@ texture = ExtResource("2_gtsfv")
 offset_top = -101.0
 offset_right = 40.0
 offset_bottom = -78.0
-
-[node name="Shoot" type="Node2D" parent="."]
 
 [node name="rangePlayerArea" type="Area2D" parent="."]
 collision_layer = 0

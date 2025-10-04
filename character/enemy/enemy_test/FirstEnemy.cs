@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using Stats;
 using Weapon;
 
 namespace Enemy
@@ -17,15 +18,15 @@ namespace Enemy
         [Export]
         public Resource Stats;
 
-        public EnemyStat enemyStat;
+        public StatGen enemyStat;
         public override void _Ready()
         {
             Player = GetNode<CharacterBody2D>("../../Player");
             GD.Print(Player.Position);
-            if (Stats is EnemyStat enemyStat)
+            if (Stats is StatGen enemyStat)
             {
                 this.enemyStat = enemyStat;
-                enemyStat.enemyTakeDamage(2);
+                enemyStat.health -= 2;
             }
             coord_depart.X = coord_x;
             coord_depart.Y = coord_y;
@@ -39,17 +40,18 @@ namespace Enemy
             Position += direction2d.Normalized() * 400 * (float)delta;
             MoveAndSlide();
 
-            if (enemyStat.Health <= 0)
+            if (enemyStat.health <= 0)
             {
                 GD.Print("dafuk ?");
                 QueueFree();
             }
         }
-        private void _on_hit_box_area_entered(Area2D area)
+
+        /* private void _on_hit_box_area_entered(Area2D area)
         {
-            GD.Print(enemyStat.Health);
-            enemyStat.enemyTakeDamage((int)area.Get("damage"));
-        }
+            GD.Print(enemyStat.health);
+            enemyStat.health -= (int)area.Get("damage");
+        } */
 
     }
 }

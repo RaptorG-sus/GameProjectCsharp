@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="StatGen" load_steps=2 format=3 uid="uid://n58v2yi3fdc7"]
+
+[ext_resource type="Script" uid="uid://qpdovwdgj5p1" path="res://Resource/StatGen.cs" id="1_bxt5i"]
+
+[resource]
+script = ExtResource("1_bxt5i")
+health = 22
+damageBase = 2

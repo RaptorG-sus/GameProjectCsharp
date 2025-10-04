@@ -1,7 +1,12 @@
 using Godot;
+using Stats;
 using System;
 public partial class Player : CharacterBody2D
 {
+    [Export]
+    Resource _playerStat;
+
+    public StatGen playerStat;
     Vector2 direction2d = Vector2.Zero;
     Vector2 direction2dForShoot;
     private Label label;
@@ -9,6 +14,8 @@ public partial class Player : CharacterBody2D
     private Node2D shootNode;
 
     private Shoot _shoot;
+
+    public int damageDistant;
     public override void _Input(InputEvent @event)
     {
         direction2d = Input.GetVector("gauche", "droite", "haut", "bas");
@@ -17,10 +24,16 @@ public partial class Player : CharacterBody2D
 
     public override void _Ready()
     {
+        if (_playerStat is StatGen playerStat)
+        {
+            this.playerStat = playerStat;
+            damageDistant = playerStat.damageDistant;    
+        }
         label = GetNode<Label>("Label");
         shootNode = GetNode<Node2D>("../../Projectile/PlayerProjectile");
         PackedScene ammo = GD.Load<PackedScene>("res://character/player/weapons/test_weaon/missile.tscn");
         _shoot = new Shoot(ammo);
+
 
     }
 
@@ -31,7 +44,7 @@ public partial class Player : CharacterBody2D
             x: Mathf.Clamp(Position.X, 0, 3000),
             y: Mathf.Clamp(Position.Y, 0, 1400)
         );
-        MoveAndSlide();
+        //MoveAndSlide();
 
         label.Text = "X = " + Position.X + "\n Y = " + Position.Y;
 

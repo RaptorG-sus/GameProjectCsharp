@@ -1,4 +1,8 @@
+using System.Runtime.InteropServices.Swift;
+using System.Security.Cryptography.X509Certificates;
+using Enemy;
 using Godot;
+using Stats;
 
 namespace Weapon
 {
@@ -17,22 +21,35 @@ namespace Weapon
         private MissileStats missileStats;
         private Timer timer;
         
-        public int damage { get; set; }
+        public int totalDamage { get; set; }
+
+        public StatGen playerStat;
+
+        CharacterBody2D player;
         public override void _Ready()
         {
             base._Ready();
             timer = GetNode<Timer>("Timer");
             Position = startPosition;
+            player = this.GetNode<CharacterBody2D>("../../../Character/Player");
+            playerStat = (StatGen)player.Get("playerStat"); 
+            
             if (Stats is MissileStats missileStats)
             {
                 this.missileStats = missileStats;
-                this.damage = missileStats.damage;
+                this.totalDamage = missileStats.damageBase + (int)player.Get("damageDistant");
             }
+        }
+
+        private void _on_body_entered(CharacterBody2D body)
+        {
+            playerStat.doDamageDistant((StatGen)body.Get("enemyStat"));
+            body.Position = new Vector2(body.Position.X + direction2d.X * 100, body.Position.Y + direction2d.Y * 100);
+            QueueFree();
         }
 
         private void _on_timer_timeout()
         {
-            missileStats.ApplyElementEffect();
             QueueFree();
         }
 

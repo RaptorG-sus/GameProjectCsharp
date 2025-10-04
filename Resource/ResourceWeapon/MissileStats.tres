@@ -9,7 +9,7 @@ metadata/_custom_type_script = "uid://dn7ayegkh61fn"
 
 [resource]
 script = ExtResource("1_p2ay2")
-damage = 2
+damageBase = 1
 critChance = 10
 critDamage = 1.5
 element = SubResource("Resource_ehxxl")

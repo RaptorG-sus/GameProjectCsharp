@@ -1,62 +1,166 @@
 @startuml player
 
-package "Game" #A0DDDD{
+package "Game" #DDDDDD{
 
-    class Player{
-        PlayerStat stats
-        int numberWeapons [1-6]
-        Weapon[0-6] weapons
-        Object[] objects
-        Vector2 Position
+    class Party{
+        Enemy[] enemys
+        Player player {1}
+        Object[] objectsOnTerrain
+        Ally[] allys 
+        int score
+        int timer
+        int difficulty
+        double difficultyIndice [1 - *]
     }
+    Package "Player" #A0DDDD{
+        class Player{
+            StatGen playerStat
+            int numberWeapons [1-6]
+            Weapon[0-6] weapons
+            Object[] objectsInPlayer
+            Vector2 Position
+        }
 
-    class PlayerStat #BBBBBB{
-        int health [0 - *]
-        int speed [1 - 400] 
-        int damageBase [1 - *] 
-        int damageProximity [0.1 - *] 
-        int damageDistant [0.1 - *] 
-        int defense [0 - *] 
-        int knockback [1 - *] +
-        double attackSpeed [1 - *] 
-        double projectileSpeed [1 - *] 
-        double aoe [0 - *]
-        double size [0.1 - *] x
-        double escape [0-100]
-        int healthRegen [0 - *]
-        double lifeSteal [-100 - 100] % 
-        double critChance [0 - 100] %
-        double critDamage [0 - *] *
-    }
-
-    class Weapon #BBBBBB{
-        int damageBase [0 - *] +
-        double critChance [0 - 100] +
-        double critDamage [0 - *] *
-        int knockback [0 - *] +
-        Element element {?}
-    }
-
-    class Lightning {
-        string nameElement
-        double chainDamage [0.1 - *] +
         
+
+        class Weapon {
+            int damageBase [0 - *] +
+            double critChance [0 - 100] +
+            double critDamage [0 - *] *
+            int knockback [0 - *] +
+            Element element {?}
+        }
+
+        class Lightning {
+            string elementName
+            double chainDamage [0.1 - *] +
+            double chainRange [1 - *] +
+        }
+
+        class Water{
+            string elementName
+            double kbModifier [0.1 - *] x
+        }
+
+        class Fire{
+            string elementName
+            double burnDamage [0.1 - *] +
+            int burnTimer [1 - *] +
+        }
+
+        class Earth{
+            string elementName
+            double lifeSteal [0.1 - *] x
+        }
+
+        class Element{
+            [Earth|Fire|Lightning|Water] element
+        }
     }
 
-    class Water{
+    package "Enemy" #DDA0A0{
+        class Enemy{
+            EnemyType enemyType
+            StatGen enemyStat
+            int numberEnemy
+        }
 
+        enum EnemyType{
+           EnemyBase
+           EnemyProx
+           EnemyDistance
+           EnemyWorms
+           EnemyMultiply 
+        }
     }
 
-    class Fire{
+    package "Objects" #A0DDA0{
+        class Objects{
+            string description
+            ObjectSpeciality speciality
+            ObjectStat[] objectstats
+            int price 
+            RarityGen rarityGen
+        }
 
+        enum ObjectSpeciality{
+            SawBlade
+            SpawnRegen
+            SpikeSparkle
+        }
+
+        class ObjectStat{
+            boolean percentage
+            double statModifier
+            StatGen Stat
+        }
+
+        class RarityGen{
+            double rarityDrop
+            Rarity rarity
+        }
+
+        enum Rarity{
+            Common
+            Uncommon
+            Rare
+            Epic
+            Legendary
+            Mythic
+        }
     }
 
-    class Earth{
+    package "Ally" #DDA0DD{
+        class Ally{
+            string name
+            Vector2 Position
+            StatGen allyStat
+            int numberAlly
+            int indiceAlly
+        }
+    }   
 
-    }
+    class StatGen {
+            int health [0 - *]
+            int speed [1 - 400] 
+            int damageBase [1 - *] 
+            int damageProximity [0 - *]+ 
+            int damageDistant [0 - *]+
+            int defense [0 - *] 
+            int knockback [1 - *] +
+            double attackSpeed [1 - *] 
+            double projectileSpeed [1 - *] 
+            double aoe [0 - *]
+            double size [0.1 - *] x
+            double escape [0-100]
+            int healthRegen [0 - *]
+            double lifeSteal [-100 - 100] % 
+            double critChance [0 - 100] %
+            double critDamage [0 - *] *
+        }
 
-    PlayerStat *-- Player
+    Player *-- Party
+    StatGen *-- Player
     Weapon *-- Player
+    Element *-- Weapon
+    Earth *-- Element
+    Fire *-- Element
+    Water *-- Element
+    Lightning *-- Element
+    
+    Enemy *-- Party
+    EnemyType *-- Enemy
+    StatGen *-- Enemy
+
+    Objects *-- Party
+    ObjectStat *-- Objects
+    ObjectSpeciality *-- Objects
+    RarityGen *-- Objects
+    Rarity *-- RarityGen 
+    StatGen *-- ObjectStat
+
+    Ally *-- Party
+    StatGen *-- Ally
 }
 
 

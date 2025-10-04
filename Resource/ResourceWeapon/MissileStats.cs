@@ -18,7 +18,7 @@ namespace Weapon
     public partial class MissileStats : Resource
     {
         [Export]
-        public int damage { get; set; }
+        public int damageBase { get; set; }
 
         [Export]
         public int critChance { get; set; }
@@ -32,13 +32,6 @@ namespace Weapon
         [Export]
         public double knockback { get; set; }
 
-        public MissileStats()
-        {
-            damage = 1;
-            critChance = 0;
-            critDamage = 0;
-            knockback = 1.0;
-        }
 
         /*public void ApplyElementEffect()
         {
